@@ -1,43 +1,98 @@
-// Display research entries
+// Load our team's astronomical research data
 
-function displayResearch(data) {
+let researchData = [];
+
+async function loadResearchData() {
+
+    const results = document.getElementById("researchResults");
+
+    results.innerHTML = "<p>Loading astronomical research...</p>";
+
+    try {
+
+        const response = await fetch(
+            "lumatrace_research_data.json"
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not load research data.");
+        }
+
+        const data = await response.json();
+
+        researchData = data.targets;
+
+        displayResearch(researchData);
+
+    }
+
+    catch (error) {
+
+        results.innerHTML =
+            "<p>Unable to load research data. Please try again.</p>";
+
+        console.error(error);
+
+    }
+
+}
+
+
+// Display astronomical targets
+
+function displayResearch(targets) {
 
     const results = document.getElementById("researchResults");
 
     results.innerHTML = "";
 
-    if (data.length === 0) {
-        results.innerHTML = "<p>No research entries found.</p>";
+    if (targets.length === 0) {
+
+        results.innerHTML = "<p>No results found.</p>";
+
         return;
+
     }
 
-    data.forEach(item => {
+    targets.forEach(target => {
 
         const card = document.createElement("div");
 
         card.className = "result-card";
 
         const title = document.createElement("h3");
-        title.textContent = item.title;
 
-        const description = document.createElement("p");
-        description.textContent = item.description;
+        title.textContent = target.target;
 
-        const source = document.createElement("p");
-        source.textContent = "Source: " + item.source;
+        const coordinates = document.createElement("p");
+
+        coordinates.textContent =
+            "RA: " + target.ra_deg +
+            "° | DEC: " + target.dec_deg + "°";
+
+        const notes = document.createElement("p");
+
+        notes.textContent = target.coordinate_notes;
+
+        const observations = document.createElement("p");
+
+        observations.textContent =
+            "SPHEREx observations: " +
+            target.observations.length;
+
+        const gaia = document.createElement("p");
+
+        gaia.textContent =
+            "Gaia data: " +
+            (Object.keys(target.gaia).length > 0
+                ? "Available in dataset"
+                : "Not yet retrieved");
 
         card.appendChild(title);
-        card.appendChild(description);
-        card.appendChild(source);
-
-        if (item.link) {
-            const link = document.createElement("a");
-            link.href = item.link;
-            link.textContent = "View reference";
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-            card.appendChild(link);
-        }
+        card.appendChild(coordinates);
+        card.appendChild(notes);
+        card.appendChild(observations);
+        card.appendChild(gaia);
 
         results.appendChild(card);
 
@@ -46,26 +101,26 @@ function displayResearch(data) {
 }
 
 
-// Search functionality
+// Search astronomical targets
 
-document.getElementById("searchInput").addEventListener("input", function() {
+document.getElementById("searchInput")
+.addEventListener("input", function() {
 
     const searchText = this.value.toLowerCase();
 
-    const filteredData = researchData.filter(item => {
+    const filteredTargets = researchData.filter(target => {
 
         return (
-            item.title.toLowerCase().includes(searchText) ||
-            item.description.toLowerCase().includes(searchText)
+            target.target.toLowerCase().includes(searchText)
         );
 
     });
 
-    displayResearch(filteredData);
+    displayResearch(filteredTargets);
 
 });
 
 
-// Load research when website opens
+// Start loading data
 
-displayResearch(researchData);
+loadResearchData();
