@@ -1,0 +1,86 @@
+{
+  "project": "LUMATRACE",
+  "dataset_title": "Target Coordinates and SPHEREx Observation Research Template",
+  "source_document": "User-uploaded 37-page research PDF",
+  "source_note": "This JSON preserves the target coordinates and field definitions found in the source document. Blank Gaia and SPHEREx observation fields have not been filled with estimated or invented values.",
+  "targets": [
+    {
+      "target": "Barnard's Star",
+      "ra_deg": 269.452077,
+      "dec_deg": 4.69336497,
+      "coordinate_notes": "Reference coordinate previously used; verify epoch/catalogue before precision matching",
+      "gaia": {},
+      "observations": []
+    },
+    {
+      "target": "Epsilon Indi B",
+      "ra_deg": 331.0441466,
+      "dec_deg": -56.7828442,
+      "coordinate_notes": "Reference coordinate previously used; verify component and epoch before precision matching",
+      "gaia": {},
+      "observations": []
+    },
+    {
+      "target": "WISE 0855",
+      "ra_deg": 133.7951292,
+      "dec_deg": -7.24514722,
+      "coordinate_notes": "Reference coordinate from target list; J2000",
+      "gaia": {},
+      "observations": []
+    },
+    {
+      "target": "RW Aurigae",
+      "ra_deg": 76.95652603,
+      "dec_deg": 30.40143817,
+      "coordinate_notes": "Reference coordinate previously used; verify epoch/catalogue before precision matching",
+      "gaia": {},
+      "observations": []
+    },
+    {
+      "target": "R Draconis",
+      "ra_deg": 248.1676108,
+      "dec_deg": 66.75497942,
+      "coordinate_notes": "Reference coordinate previously used; verify epoch/catalogue before precision matching",
+      "gaia": {},
+      "observations": []
+    }
+  ],
+  "gaia_field_definitions": {
+    "gaia_dr3_source_id": "Gaia catalogue identifier; leave blank until a reliable Gaia source match is confirmed.",
+    "gaia_ra_deg": "Gaia source right ascension in degrees.",
+    "gaia_dec_deg": "Gaia source declination in degrees.",
+    "ref_epoch": "Epoch for Gaia astrometric position.",
+    "parallax_mas": "Parallax in milliarcseconds.",
+    "pmra_mas_yr": "Proper motion in right ascension, milliarcseconds per year.",
+    "pmdec_mas_yr": "Proper motion in declination, milliarcseconds per year.",
+    "radial_velocity_km_s": "Line-of-sight velocity in km/s, only if available.",
+    "phot_g_mean_mag": "Gaia mean G-band magnitude.",
+    "phot_bp_mean_mag": "Gaia mean BP-band magnitude.",
+    "phot_rp_mean_mag": "Gaia mean RP-band magnitude.",
+    "bp_rp_mag": "BP minus RP colour index.",
+    "gaia_match_status": "Status of the Gaia source match.",
+    "notes": "Additional Gaia matching notes."
+  },
+  "observation_field_definitions": {
+    "observation_number": "Observation sequence number for this target.",
+    "obs_id": "Exact archive observation ID; do not infer dates from the ID.",
+    "observation_date_utc": "Actual date/time from archive metadata.",
+    "mjd_or_time_start": "Observation start time or MJD from archive metadata.",
+    "mjd_or_time_end": "Observation end time or MJD from archive metadata.",
+    "band_or_energy_bandpass": "Observed bandpass; comparisons should use matching bands.",
+    "s_ra_deg": "Observation/image pointing right ascension in degrees.",
+    "s_dec_deg": "Observation/image pointing declination in degrees.",
+    "access_url_or_download_name": "Archive access URL or downloaded product filename.",
+    "product_type": "For example, science image, cutout, or calibration product; verify from archive metadata.",
+    "target_coverage_confirmed": "Whether target coverage has been confirmed.",
+    "same_band_pair_confirmed": "Whether a comparable same-band observation pair has been confirmed.",
+    "data_download_status": "Download status.",
+    "notes": "Additional observation notes."
+  },
+  "research_guidance": [
+    "The source document is a structured handoff/template, not proof that Gaia or SPHEREx matches or observations have been retrieved.",
+    "Use actual archive metadata for dates and observation IDs.",
+    "Leave unavailable values blank or mark them as 'Not yet retrieved'; never estimate them.",
+    "SPHEREx_Observations is described in the source document as the combined master table."
+  ]
+}
